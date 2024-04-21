@@ -36,5 +36,8 @@ class finalData {
 
   static List<cartProduct> cartList = [];
 
-  static Temporary shipperIndexTempotary = Temporary(stringData: '', intData: 0, doubleData: 0);
+  static Temporary shopIndexTempotary = Temporary(stringData: '', intData: 0, doubleData: 0);
+
+  static Temporary historyIndexTempotary = Temporary(stringData: '', intData: 0, doubleData: 0);
+
 }

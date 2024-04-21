@@ -251,6 +251,7 @@ class _login_screenState extends State<login_screen> {
                       await login_controller.get_and_login_shop_account(userController.text.toString());
                       if (passController.text.toString() == finalData.shop_account.password) {
                         if (finalData.shop_account.lockStatus != 0) {
+                          finalData.lastOrderTime = DateTime.now();
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);
                         } else {
                           toastMessage('Tài khoản đã bị khóa');

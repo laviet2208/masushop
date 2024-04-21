@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
+import 'package:masumerchant/MasuMerchant/screen/main_screen/on_off_restaurant.dart';
+
 
 class main_page extends StatefulWidget {
   const main_page({super.key});
@@ -9,6 +11,7 @@ class main_page extends StatefulWidget {
 }
 
 class _main_pageState extends State<main_page> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -229,7 +232,12 @@ class _main_pageState extends State<main_page> {
                           size: 25,
                         ),
                         onTap: () async {
-
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return on_off_restaurant();
+                            },
+                          );
                         },
                       ),
                     )
