@@ -17,9 +17,10 @@ class login_controller {
 
   static Future<void> get_and_login_shop_account(String phone) async {
     final reference = FirebaseDatabase.instance.reference();
-    await reference.child("Restaurant").orderByChild('phone').equalTo(phone).onValue.listen((event) {
+    await reference.child("Restaurant").orderByChild('phone').equalTo(phone).onValue.listen((event) async {
       final dynamic restaurants = event.snapshot.value;
-      restaurants.forEach((key, value) {
+      await restaurants.forEach((key, value) {
+        finalData.shop_account.password = value['password'].toString();
         if (finalData.shop_account.id == '') {
           finalData.shop_account = ShopAccount.fromJson(value);
         }

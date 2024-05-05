@@ -3,6 +3,7 @@ import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 import 'package:masumerchant/MasuMerchant/Data/otherData/utils.dart';
 import 'package:masumerchant/MasuMerchant/screen/login_screen/login_controller.dart';
 import 'package:masumerchant/MasuMerchant/screen/main_screen/main_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class login_screen extends StatefulWidget {
   const login_screen({super.key});
@@ -13,10 +14,34 @@ class login_screen extends StatefulWidget {
 
 class _login_screenState extends State<login_screen> {
   bool loading = false;
+  String? name;
+  String? pass;
   final userController = TextEditingController();
   final passController = TextEditingController();
 
+  Future<void> saveString(String data, String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, data);
+  }
 
+  Future<void> getSavedata() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = prefs.getString('username');
+    pass = prefs.getString('password');
+    if (name != null) {
+      userController.text = name!;
+    }
+    if (pass != null) {
+      passController.text = pass!;
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getSavedata();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -252,6 +277,8 @@ class _login_screenState extends State<login_screen> {
                       if (passController.text.toString() == finalData.shop_account.password) {
                         if (finalData.shop_account.lockStatus != 0) {
                           finalData.lastOrderTime = DateTime.now();
+                          await saveString(userController.text.toString(), 'username');
+                          await saveString(passController.text.toString(), 'password');
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);
                         } else {
                           toastMessage('Tài khoản đã bị khóa');
