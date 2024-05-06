@@ -273,19 +273,19 @@ class _login_screenState extends State<login_screen> {
                       loading = true;
                     });
                     if (await login_controller.check_have_shop_data(userController.text.toString())) {
-                      await login_controller.get_and_login_shop_account(userController.text.toString());
-                      if (passController.text.toString() == finalData.shop_account.password) {
-                        if (finalData.shop_account.lockStatus != 0) {
-                          finalData.lastOrderTime = DateTime.now();
-                          await saveString(userController.text.toString(), 'username');
-                          await saveString(passController.text.toString(), 'password');
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);
-                        } else {
-                          toastMessage('Tài khoản đã bị khóa');
-                        }
-                      } else {
-                        toastMessage('Kiểm tra lại mật khẩu');
-                      }
+                      await login_controller.get_and_login_shop_account(userController.text.toString(), passController.text.toString(), () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);}, () {});
+                      // if (passController.text.toString() == finalData.shop_account.password) {
+                      //   if (finalData.shop_account.lockStatus != 0) {
+                      //     finalData.lastOrderTime = DateTime.now();
+                      //     await saveString(userController.text.toString(), 'username');
+                      //     await saveString(passController.text.toString(), 'password');
+                      //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);
+                      //   } else {
+                      //     toastMessage('Tài khoản đã bị khóa');
+                      //   }
+                      // } else {
+                      //   toastMessage('Kiểm tra lại mật khẩu');
+                      // }
                     } else {
                       toastMessage('Kiểm tra lại tài khoản');
                     }

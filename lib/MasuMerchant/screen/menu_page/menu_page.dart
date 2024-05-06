@@ -56,8 +56,8 @@ class _menu_pageState extends State<menu_page> with SingleTickerProviderStateMix
                 color: Colors.yellow,
               ),
               tabs: [
-                Tab(text: 'Món ăn'),
                 Tab(text: 'Danh mục'),
+                Tab(text: 'Món ăn'),
               ],
             ),
           ],

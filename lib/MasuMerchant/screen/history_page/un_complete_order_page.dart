@@ -48,7 +48,8 @@ class _un_complete_order_pageState extends State<un_complete_order_page> {
     return Scaffold(
       body: Container(
         decoration: get_usually_decoration_type_2_gradient(),
-        child: ListView.builder(
+        alignment: Alignment.center,
+        child: list.length != 0 ? ListView.builder(
           itemCount: list.length,
           padding: EdgeInsets.only(top: 20),
           itemBuilder: (context, index) {
@@ -57,7 +58,7 @@ class _un_complete_order_pageState extends State<un_complete_order_page> {
               child: item_un_complete_order(order: list[index]),
             );
           },
-        ),
+        ) : Text('Hiện chưa có đơn nào', style: TextStyle(color: Colors.black),),
       ),
     );
   }

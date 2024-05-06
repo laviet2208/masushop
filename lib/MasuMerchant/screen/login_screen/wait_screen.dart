@@ -20,11 +20,11 @@ class _wait_screenState extends State<wait_screen> {
 
   Future<void> getSavedata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('username');
-    pass = prefs.getString('password');
+    name = await prefs.getString('username');
+    pass = await prefs.getString('password');
     if (name != '' && pass != '' && name != null && pass != null) {
       if (await login_controller.check_have_shop_data(name!)) {
-        await login_controller.get_and_login_shop_account(name!);
+        await login_controller.get_and_login_shop_account(name!, pass!, () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);}, () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => login_screen(),),);});
         if (pass == finalData.shop_account.password) {
           if (finalData.shop_account.lockStatus != 0) {
             finalData.lastOrderTime = DateTime.now();

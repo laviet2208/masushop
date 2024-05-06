@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
+import 'package:masumerchant/MasuMerchant/Data/otherData/utils.dart';
 import 'package:masumerchant/MasuMerchant/screen/main_screen/on_off_restaurant.dart';
+
+import '../login_screen/login_screen.dart';
 
 
 class main_page extends StatefulWidget {
@@ -108,7 +111,7 @@ class _main_pageState extends State<main_page> {
                         )
                     ),
 
-                    Container(height: 10,)
+                    Container(height: 10,),
                   ],
                 ),
               ),
@@ -245,6 +248,80 @@ class _main_pageState extends State<main_page> {
                 ),
               ),
             ),
+
+            Container(height: 20,),
+
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4), // màu của shadow
+                      spreadRadius: 5, // bán kính của shadow
+                      blurRadius: 7, // độ mờ của shadow
+                      offset: Offset(0, 3), // vị trí của shadow
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(height: 15,),
+
+                    GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Đăng xuất',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'muli',
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => login_screen(),),);
+                      },
+                    ),
+
+                    Container(height: 15,),
+
+                    GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Yêu cầu xóa tài khoản',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'muli',
+                              fontSize: 14,
+                              color: Colors.redAccent,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        toastMessage('Gửi yêu cầu xóa tài khoản thành công');
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => login_screen(),),);
+                      },
+                    ),
+
+                    Container(height: 15,)
+                  ],
+                ),
+              ),
+            ),
+
           ],
         ),
       ),
