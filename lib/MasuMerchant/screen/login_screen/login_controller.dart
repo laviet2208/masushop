@@ -10,7 +10,7 @@ class login_controller {
   static Future<bool> check_have_shop_data(String phone) async {
     final reference = FirebaseDatabase.instance.reference();
     bool check = true;
-    await reference.child("Restaurant").orderByChild('phone').equalTo(phone).once().then((DatabaseEvent event) async {
+    await reference.child(finalData.type == 1 ? "Restaurant" : 'Store').orderByChild('phone').equalTo(phone).once().then((DatabaseEvent event) async {
       final dynamic accounts = event.snapshot.value;
       if (accounts == null) {
         check = false;
@@ -26,7 +26,7 @@ class login_controller {
 
   static Future<void> get_and_login_shop_account(String phone, String pass, VoidCallback callback,  VoidCallback callback1) async {
     final reference = FirebaseDatabase.instance.reference();
-    await reference.child("Restaurant").orderByChild('phone').equalTo(phone).onValue.listen((event) async {
+    await reference.child(finalData.type == 1 ? "Restaurant" : 'Store').orderByChild('phone').equalTo(phone).onValue.listen((event) async {
       final dynamic restaurants = event.snapshot.value;
       await restaurants.forEach((key, value) async {
         finalData.shop_account = ShopAccount.fromJson(value);

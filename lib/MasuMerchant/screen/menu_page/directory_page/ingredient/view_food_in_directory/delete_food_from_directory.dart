@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 import '../../../../../Data/accountData/shopData/productDirectory.dart';
 import '../../../../../Data/otherData/utils.dart';
 
@@ -17,7 +18,7 @@ class _delete_food_from_directoryState extends State<delete_food_from_directory>
   Future<void> change_directory(productDirectory directory) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('FoodDirectory').child(directory.id).set(directory.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'FoodDirectory' : 'ProductDirectory').child(directory.id).set(directory.toJson());
       toastMessage('Sửa danh mục thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');

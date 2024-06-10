@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:masumerchant/MasuMerchant/Data/accountData/shopData/Product.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 
 import '../../../../Data/otherData/utils.dart';
 
@@ -48,7 +49,7 @@ class _edit_foodState extends State<edit_food> {
   Future<void> pushData(Product food) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('Food').child(food.id).set(food.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'Food' : 'Product').child(food.id).set(food.toJson());
       toastMessage('sửa thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -58,7 +59,7 @@ class _edit_foodState extends State<edit_food> {
 
   Future<void> uploadImageToFirebaseStorage(Uint8List imageBytes, String imageName) async {
     try {
-      Reference storageReference = FirebaseStorage.instance.ref().child('Food/$imageName.png');
+      Reference storageReference = FirebaseStorage.instance.ref().child(finalData.type == 1 ? 'Food/$imageName.png' : 'Product/$imageName.png');
       SettableMetadata metadata = SettableMetadata(contentType: 'image/png');
       UploadTask uploadTask = storageReference.putData(imageBytes, metadata);
       // Lắng nghe sự kiện khi upload hoàn thành
@@ -95,7 +96,7 @@ class _edit_foodState extends State<edit_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Tên món ăn *',
+                'Tên sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -143,7 +144,7 @@ class _edit_foodState extends State<edit_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Nhập tên món ăn',
+                          hintText: 'Nhập tên sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -163,7 +164,7 @@ class _edit_foodState extends State<edit_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Mô tả món ăn *',
+                'Mô tả sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -211,7 +212,7 @@ class _edit_foodState extends State<edit_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Mô tả món ăn',
+                          hintText: 'Mô tả sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -231,7 +232,7 @@ class _edit_foodState extends State<edit_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Giá tiền món ăn *',
+                'Giá tiền sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -281,7 +282,7 @@ class _edit_foodState extends State<edit_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Nhập giá món ăn',
+                          hintText: 'Nhập giá sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -301,7 +302,7 @@ class _edit_foodState extends State<edit_food> {
             Container(
               alignment: Alignment.center,
               child: Text(
-                'Hình ảnh của món ăn',
+                'Hình ảnh của sản phẩm',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'muli',
@@ -362,7 +363,7 @@ class _edit_foodState extends State<edit_food> {
                   ),
                   child: !loading ? Center(
                     child: Text(
-                      'Lưu món ăn',
+                      'Lưu sản phẩm',
                       style: TextStyle(
                         fontFamily: 'muli',
                         color: Colors.black,

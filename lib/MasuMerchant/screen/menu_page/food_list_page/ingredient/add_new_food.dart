@@ -49,7 +49,7 @@ class _add_new_foodState extends State<add_new_food> {
   Future<void> pushData(Product food) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('Food').child(food.id).set(food.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'Food' : 'Product').child(food.id).set(food.toJson());
       toastMessage('sửa thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -59,7 +59,7 @@ class _add_new_foodState extends State<add_new_food> {
 
   Future<void> uploadImageToFirebaseStorage(Uint8List imageBytes, String imageName) async {
     try {
-      Reference storageReference = FirebaseStorage.instance.ref().child('Food/$imageName.png');
+      Reference storageReference = FirebaseStorage.instance.ref().child(finalData.type == 1 ? 'Food/$imageName.png' : 'Product/$imageName.png');
       SettableMetadata metadata = SettableMetadata(contentType: 'image/png');
       UploadTask uploadTask = storageReference.putData(imageBytes, metadata);
       // Lắng nghe sự kiện khi upload hoàn thành
@@ -87,7 +87,7 @@ class _add_new_foodState extends State<add_new_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Tên món ăn *',
+                finalData.type == 1 ? 'Tên món ăn *' : 'Tên sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -135,7 +135,7 @@ class _add_new_foodState extends State<add_new_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Nhập tên món ăn',
+                          hintText: finalData.type == 1 ? 'Nhập tên món ăn' : 'Nhập tên sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -155,7 +155,7 @@ class _add_new_foodState extends State<add_new_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Mô tả món ăn *',
+                finalData.type == 1 ? 'Mô tả món ăn *' : 'Mô tả sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -203,7 +203,7 @@ class _add_new_foodState extends State<add_new_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Mô tả món ăn',
+                          hintText: finalData.type == 1 ? 'Mô tả món ăn' : 'Mô tả sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -223,7 +223,7 @@ class _add_new_foodState extends State<add_new_food> {
             Padding(
               padding: EdgeInsets.only(left: 10),
               child: Text(
-                'Giá tiền món ăn *',
+                finalData.type == 1 ? 'Giá tiền món ăn *' : 'Giá tiền sản phẩm *',
                 style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,
@@ -273,7 +273,7 @@ class _add_new_foodState extends State<add_new_food> {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Nhập giá món ăn',
+                          hintText: 'Nhập giá sản phẩm',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -293,7 +293,7 @@ class _add_new_foodState extends State<add_new_food> {
             Container(
               alignment: Alignment.center,
               child: Text(
-                'Hình ảnh của món ăn',
+                'Hình ảnh của sản phẩm',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'muli',
@@ -354,7 +354,7 @@ class _add_new_foodState extends State<add_new_food> {
                   ),
                   child: !loading ? Center(
                     child: Text(
-                      'Lưu món ăn',
+                      'Lưu sản phẩm',
                       style: TextStyle(
                         fontFamily: 'muli',
                         color: Colors.black,

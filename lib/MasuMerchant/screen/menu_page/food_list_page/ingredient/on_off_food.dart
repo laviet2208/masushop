@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 
 import '../../../../Data/accountData/shopData/Product.dart';
 import '../../../../Data/otherData/utils.dart';
@@ -16,14 +17,14 @@ class _on_off_foodState extends State<on_off_food> {
 
   Future<void> push_new_food(Product product) async {
     DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-    await databaseRef.child('Food').child(product.id).set(product.toJson());
-    toastMessage('Tắt bật món thành công');
+    await databaseRef.child(finalData.type == 1 ? 'Food' : 'Product').child(product.id).set(product.toJson());
+    toastMessage('Tắt bật thành công');
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Xác nhận bật/tắt món',),
+      title: Text('Xác nhận bật/tắt sản phẩm',),
       actions: <Widget>[
         TextButton(
           onPressed: () async {

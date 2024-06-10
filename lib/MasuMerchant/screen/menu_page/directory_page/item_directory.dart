@@ -41,7 +41,7 @@ class _item_directoryState extends State<item_directory> {
                         child: Text(
                           widget.directory.mainName + ' (' + widget.directory.foodList.length.toString() + ' Món)',
                           style: TextStyle(
-                              fontFamily: 'arial',
+                              fontFamily: 'muli',
                               fontSize: 14,
                               color: Colors.black,
                               fontWeight: FontWeight.bold
@@ -65,7 +65,7 @@ class _item_directoryState extends State<item_directory> {
                                 Text(
                                   'Thao tác',
                                   style: TextStyle(
-                                      fontFamily: 'arial',
+                                      fontFamily: 'muli',
                                       fontSize: 14,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.normal
@@ -123,7 +123,7 @@ class _item_directoryState extends State<item_directory> {
                                 child: Text(
                                   'Xóa danh mục',
                                   style: TextStyle(
-                                      fontFamily: 'arial',
+                                      fontFamily: 'muli',
                                       fontSize: 14,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.normal
@@ -165,9 +165,9 @@ class _item_directoryState extends State<item_directory> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Add món ăn',
+                                  'Add sản phẩm',
                                   style: TextStyle(
-                                      fontFamily: 'arial',
+                                      fontFamily: 'muli',
                                       fontSize: 14,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.normal
@@ -208,7 +208,7 @@ class _item_directoryState extends State<item_directory> {
                                 child: Text(
                                   'Danh sách sản phẩm',
                                   style: TextStyle(
-                                      fontFamily: 'arial',
+                                      fontFamily: 'muli',
                                       fontSize: 14,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.normal

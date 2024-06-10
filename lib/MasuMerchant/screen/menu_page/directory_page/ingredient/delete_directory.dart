@@ -17,7 +17,7 @@ class _delete_directoryState extends State<delete_directory> {
   Future<void> change_shop() async {
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('Restaurant').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'Restaurant' : 'Store').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
       toastMessage('Xóa danh mục thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -27,7 +27,7 @@ class _delete_directoryState extends State<delete_directory> {
 
   Future<void> delete_directory() async {
     DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-    await databaseRef.child('FoodDirectory').child(widget.directory.id).remove();
+    await databaseRef.child(finalData.type == 1 ? 'FoodDirectory' : 'StoreDirectory').child(widget.directory.id).remove();
     toastMessage('Xóa danh mục thành công');
   }
 

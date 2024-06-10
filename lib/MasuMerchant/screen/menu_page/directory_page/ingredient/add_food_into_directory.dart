@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:masumerchant/MasuMerchant/Data/accountData/shopData/productDirectory.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 
 import '../../../../Data/accountData/shopData/Product.dart';
 import '../../../../Data/otherData/utils.dart';
@@ -21,7 +22,7 @@ class _add_food_into_directoryState extends State<add_food_into_directory> {
 
   void get_product_data() {
     final reference = FirebaseDatabase.instance.reference();
-    reference.child("Food").orderByChild('owner').equalTo(widget.directory.ownerID).onValue.listen((event) {
+    reference.child(finalData.type == 1 ? "Food" : 'Product').orderByChild('owner').equalTo(widget.directory.ownerID).onValue.listen((event) {
       list_product.clear();
       final dynamic orders = event.snapshot.value;
       orders.forEach((key, value) {
@@ -42,7 +43,7 @@ class _add_food_into_directoryState extends State<add_food_into_directory> {
   Future<void> change_directory(productDirectory directory) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('FoodDirectory').child(directory.id).set(directory.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'FoodDirectory' : 'ProductDirectory').child(directory.id).set(directory.toJson());
       toastMessage('Thêm danh mục thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -63,7 +64,7 @@ class _add_food_into_directoryState extends State<add_food_into_directory> {
       insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      title: Text('Thêm món vào danh mục'),
+      title: Text('Thêm sản phẩm vào danh mục'),
       content: Container(
         width: MediaQuery.of(context).size.width - 30,
         height: MediaQuery.of(context).size.height/2,

@@ -16,7 +16,7 @@ class main_screen extends StatefulWidget {
 class _main_screenState extends State<main_screen> {
   void get_shop_account() async {
     final reference = FirebaseDatabase.instance.reference();
-    await reference.child("Restaurant").child(finalData.shop_account.id).onValue.listen((event) {
+    await reference.child(finalData.type == 1 ? "Restaurant" : "Store").child(finalData.shop_account.id).onValue.listen((event) {
       final dynamic restaurant = event.snapshot.value;
       finalData.shop_account = ShopAccount.fromJson(restaurant);
       setState(() {

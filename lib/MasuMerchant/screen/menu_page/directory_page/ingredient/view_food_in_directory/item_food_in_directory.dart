@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:masumerchant/MasuMerchant/Data/accountData/shopData/Product.dart';
 import 'package:masumerchant/MasuMerchant/Data/accountData/shopData/productDirectory.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 import 'package:masumerchant/MasuMerchant/Data/otherData/Time.dart';
 
 import '../../../../../Data/otherData/Tool.dart';
@@ -23,7 +24,7 @@ class _item_food_in_directoryState extends State<item_food_in_directory> {
 
   void get_product_data() {
     final reference = FirebaseDatabase.instance.reference();
-    reference.child("Food").child(widget.id).onValue.listen((event) {
+    reference.child(finalData.type == 1 ? "Food" : "Product").child(widget.id).onValue.listen((event) {
       final dynamic pro = event.snapshot.value;
       if (pro != null) {
         product = Product.fromJson(pro);
@@ -40,7 +41,7 @@ class _item_food_in_directoryState extends State<item_food_in_directory> {
   Future<void> change_directory(productDirectory directory) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('FoodDirectory').child(directory.id).set(directory.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'FoodDirectory' : 'ProductDirectory').child(directory.id).set(directory.toJson());
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
       throw error;
@@ -71,7 +72,7 @@ class _item_food_in_directoryState extends State<item_food_in_directory> {
               bottom: 2,
               left: 2,
               child: FutureBuilder(
-                future: _getImageURL('Food/' + product.id + '.png'),
+                future: finalData.type == 1 ? _getImageURL('Food/' + product.id + '.png') : _getImageURL('Product/' + product.id + '.png'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator(color: Colors.yellow, strokeWidth: 3,);

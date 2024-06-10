@@ -20,7 +20,7 @@ class _add_food_directoryState extends State<add_food_directory> {
   Future<void> push_new_directory(productDirectory directory) async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('FoodDirectory').child(directory.id).set(directory.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'FoodDirectory' : 'ProductDirectory').child(directory.id).set(directory.toJson());
       toastMessage('Thêm danh mục thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -31,7 +31,7 @@ class _add_food_directoryState extends State<add_food_directory> {
   Future<void> change_shop() async{
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('Restaurant').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'Restaurant' : 'Store').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
       toastMessage('Thêm danh mục thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');
@@ -62,7 +62,7 @@ class _add_food_directoryState extends State<add_food_directory> {
               Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  'Tên danh mục đồ ăn *',
+                  'Tên danh mục sản phẩm *',
                   style: TextStyle(
                     fontFamily: 'muli',
                     fontSize: 14,

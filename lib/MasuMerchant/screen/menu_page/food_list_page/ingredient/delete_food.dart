@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 
 import '../../../../Data/accountData/shopData/Product.dart';
 import '../../../../Data/otherData/utils.dart';
@@ -18,7 +19,7 @@ class _delete_foodState extends State<delete_food> {
   bool loading = false;
   Future<void> delete_product() async {
     DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-    await databaseRef.child('Food').child(widget.product.id).remove();
+    await databaseRef.child(finalData.type == 1 ? 'Food' : 'Product').child(widget.product.id).remove();
     toastMessage('Xóa thành công');
   }
 
@@ -43,7 +44,7 @@ class _delete_foodState extends State<delete_food> {
             setState(() {
               loading = true;
             });
-            await deleteImage('Food/' + widget.product.id + '.png');
+            await deleteImage(finalData.type == 1 ? ('Food/' + widget.product.id + '.png') : ('Product/' + widget.product.id + '.png'));
             await delete_product();
             setState(() {
               loading = false;

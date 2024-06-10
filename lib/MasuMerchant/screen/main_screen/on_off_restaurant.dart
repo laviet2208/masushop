@@ -15,7 +15,7 @@ class _on_off_restaurantState extends State<on_off_restaurant> {
   Future<void> change_shop() async {
     try {
       DatabaseReference databaseRef = FirebaseDatabase.instance.reference();
-      await databaseRef.child('Restaurant').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
+      await databaseRef.child(finalData.type == 1 ? 'Restaurant' : 'Store').child(finalData.shop_account.id).set(finalData.shop_account.toJson());
       toastMessage('Bật tắt thành công');
     } catch (error) {
       print('Đã xảy ra lỗi khi đẩy catchOrder: $error');

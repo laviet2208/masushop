@@ -24,6 +24,11 @@ class _login_screenState extends State<login_screen> {
     prefs.setString(key, data);
   }
 
+  static Future<void> saveInt(int data, String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(key, data);
+  }
+
   Future<void> getSavedata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     name = prefs.getString('username');
@@ -83,12 +88,113 @@ class _login_screenState extends State<login_screen> {
               Container(
                 alignment: Alignment.center,
                 child: Text(
-                  'Quản lý nhà hàng Masu',
+                  'Quản lý nhà hàng, cửa hàng Masu',
                   style: TextStyle(
                     fontFamily: 'muli',
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
+                  ),
+                ),
+              ),
+
+              Container(
+                height: 20,
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        child: GestureDetector(
+                          child: Container(
+                            width: (width - 20)/2 - 0.5,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 1,
+                                  color: finalData.type == 1 ? Colors.black : Colors.transparent,
+                                )
+                              ),
+                              color: Colors.transparent,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Nhà hàng',
+                                style: TextStyle(
+                                  fontFamily: 'muli',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          onTap: () async {
+                            await saveInt(1, 'type');
+                            setState(() {
+                              finalData.type = 1;
+                            });
+                          },
+                        ),
+                      ),
+
+                      Positioned(
+                        top: 10,
+                        bottom: 10,
+                        left: (width - 20)/2 - 0.5,
+                        child: Container(
+                          width: 1,
+                          decoration: BoxDecoration(
+                            color: Colors.black
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          child: Container(
+                            width: (width - 20)/2 - 0.5,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                    width: 1,
+                                    color: finalData.type == 2 ? Colors.black : Colors.transparent,
+                                  )
+                                ),
+                              color: Colors.transparent,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Cửa hàng',
+                                style: TextStyle(
+                                  fontFamily: 'muli',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          onTap: () async {
+                            await saveInt(2, 'type');
+                            setState(() {
+                              finalData.type = 2;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

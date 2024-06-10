@@ -22,6 +22,10 @@ class _wait_screenState extends State<wait_screen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     name = await prefs.getString('username');
     pass = await prefs.getString('password');
+    int? type = await prefs.getInt('type');
+    if (type != null) {
+      finalData.type = type;
+    }
     if (name != '' && pass != '' && name != null && pass != null) {
       if (await login_controller.check_have_shop_data(name!)) {
         await login_controller.get_and_login_shop_account(name!, pass!, () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);}, () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => login_screen(),),);});

@@ -63,7 +63,7 @@ class _have_new_food_order_dialogState extends State<have_new_food_order_dialog>
             Container(
               alignment: Alignment.center,
               child: Text(
-                'Đơn đồ ăn\n' + widget.order.id,
+                'Đơn hàng\n' + widget.order.id,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 15,

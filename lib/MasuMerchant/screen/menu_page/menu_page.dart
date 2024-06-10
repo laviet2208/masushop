@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 import 'package:masumerchant/MasuMerchant/screen/menu_page/directory_page/directory_page.dart';
 import 'package:masumerchant/MasuMerchant/screen/menu_page/food_list_page/food_list_page.dart';
 
@@ -57,7 +58,7 @@ class _menu_pageState extends State<menu_page> with SingleTickerProviderStateMix
               ),
               tabs: [
                 Tab(text: 'Danh mục'),
-                Tab(text: 'Món ăn'),
+                Tab(text: finalData.type == 1 ? 'Món ăn' : 'Sản phẩm'),
               ],
             ),
           ],

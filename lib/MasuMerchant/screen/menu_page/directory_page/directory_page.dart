@@ -17,7 +17,7 @@ class _directory_pageState extends State<directory_page> {
 
   void get_directory_data()  {
     final reference = FirebaseDatabase.instance.reference();
-    reference.child('FoodDirectory').orderByChild('ownerID').equalTo(finalData.shop_account.id).onValue.listen((event) {
+    reference.child(finalData.type == 1 ? 'FoodDirectory' : 'ProductDirectory').orderByChild('ownerID').equalTo(finalData.shop_account.id).onValue.listen((event) {
       product_directory_list.clear();
       final dynamic directories = event.snapshot.value;
       directories.forEach((key, value) {

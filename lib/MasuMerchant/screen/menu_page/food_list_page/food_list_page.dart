@@ -18,7 +18,7 @@ class _food_list_pageState extends State<food_list_page> {
 
   void get_product_data() {
     final reference = FirebaseDatabase.instance.reference();
-    reference.child("Food").orderByChild('owner').equalTo(finalData.shop_account.id).onValue.listen((event) {
+    reference.child(finalData.type == 1 ? "Food" : "Product").orderByChild('owner').equalTo(finalData.shop_account.id).onValue.listen((event) {
       productList.clear();
       final dynamic orders = event.snapshot.value;
       orders.forEach((key, value) {
@@ -87,7 +87,7 @@ class _food_list_pageState extends State<food_list_page> {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Thêm món ăn',
+                  finalData.type == 1 ? 'Thêm món ăn' : 'Thêm sản phẩm',
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'muli',

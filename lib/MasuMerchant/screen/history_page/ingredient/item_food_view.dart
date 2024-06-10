@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:masumerchant/MasuMerchant/Data/finalData/finalData.dart';
 
 import '../../../Data/accountData/shopData/cartProduct.dart';
 import '../../../Data/otherData/Tool.dart';
@@ -17,7 +18,7 @@ class item_food_view extends StatefulWidget {
 class _item_food_viewState extends State<item_food_view> {
 
   Future<String> _getImageURL() async {
-    final ref = FirebaseStorage.instance.ref().child('Food').child(widget.product.product.id + '.png');
+    final ref = FirebaseStorage.instance.ref().child(finalData.type == 1 ? 'Food' : 'Product').child(widget.product.product.id + '.png');
     final url = await ref.getDownloadURL();
     return url;
   }
