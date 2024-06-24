@@ -257,7 +257,7 @@ class _ItemdonhangchuaxacnhanState extends State<Itemdonhangchuaxacnhan> {
                       top: 0,
                       right: 0,
                       child: Text(
-                        getStringNumber(widget.order.cost * (1 - widget.order.costFee.discount/100)) + '.đ',
+                        'getStringNumber(widget.order.cost * (1 - widget.order.costFee.discount/100)',
                         textAlign: TextAlign.end,
                         style: TextStyle(
                             fontSize: 14,

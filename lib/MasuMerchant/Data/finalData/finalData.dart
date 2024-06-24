@@ -28,7 +28,7 @@ class finalData {
 
   static List<String> restaurant_type_names = ['Năm sao', 'Ăn vặt', 'Bún phở', 'Cơm', 'Khuyến mãi', 'Món nhậu', 'Nước uống', 'Fast food', 'Trà sữa',];
 
-  static Cost bikeCost = Cost(departKM: 0, departCost: 0, perKMcost: 0, discount: 0);
+  // static Cost bikeCost = Cost(departKM: 0, departCost: 0, perKMcost: 0, discount: 0);
 
   static weatherCost weathercost = weatherCost(available: 0, cost: 0, weatherTitle: '');
 

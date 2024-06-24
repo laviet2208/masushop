@@ -30,7 +30,7 @@ class _ContainerdoanhthuState extends State<Containerdoanhthu> {
         foodOrder foodorder = foodOrder.fromJson(value);
         if ((foodorder.status == 'D') && foodorder.productList[0].owner.id == currentAccount.id) {
           if (foodorder.S4time.day == Time.getCurrentTime().day && Time.getCurrentTime().month == foodorder.S4time.month && foodorder.S4time.year == Time.getCurrentTime().year) {
-            totalMoney = totalMoney + (foodorder.cost * (1 - (foodorder.costFee.discount/100)));
+            // totalMoney = totalMoney + (foodorder.cost * (1 - (foodorder.costFee.discount/100)));
           }
         }
       });

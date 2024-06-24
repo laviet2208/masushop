@@ -7,6 +7,7 @@ import 'package:masumerchant/MasuMerchant/screen/history_page/history_controller
 import 'package:masumerchant/MasuMerchant/screen/main_screen/main_screen.dart';
 
 import '../../../Data/accountData/shopData/cartProduct.dart';
+import '../../../Data/costData/Cost.dart';
 import '../../../Data/voucherData/Voucher.dart';
 import 'item_food_view.dart';
 
@@ -31,7 +32,7 @@ class _view_order_detailState extends State<view_order_detail> {
     productList: [],
     shopList: [],
     timeList: [],
-    costFee: finalData.bikeCost,
+    costFee: Cost(departKM: 0, departCost: 0, milestoneKM1: 0, milestoneKM2: 0, perKMcost1: 0, perKMcost2: 0, perKMcost3: 0, discountLimit: 0, discountMoney: 0, discountPercent: 0),
     note: '',
     waitFee: 0,
     weatherFee: 0,
